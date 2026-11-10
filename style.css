@@ -1,0 +1,227 @@
+/* ===================================================================
+   Cyber/Tech Dark Mode (Soft Crimson / Rose Red Palette)
+   Custom Stylesheet for Pannathon Phetthong ICT Portfolio
+   =================================================================== */
+
+@layer utilities {
+  /* Cyber Glow Shadows */
+  .glow-crimson {
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.45);
+  }
+  .glow-crimson-sm {
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #07080c;
+}
+::-webkit-scrollbar-thumb {
+  background: #be123c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f43f5e;
+  box-shadow: 0 0 10px #f43f5e;
+}
+
+/* Background Cyber Vignette & Subtle Grid */
+.cyber-vignette {
+  background: radial-gradient(circle at 50% 20%, rgba(244, 63, 94, 0.08) 0%, rgba(7, 8, 12, 0.95) 75%);
+}
+
+/* Scanline Effect */
+.cyber-scanline {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+}
+
+/* Cyber Angled Corner Box */
+.cyber-corner {
+  position: relative;
+}
+.cyber-corner::before,
+.cyber-corner::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: #f43f5e;
+  pointer-events: none;
+}
+.cyber-corner::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #f43f5e;
+  border-left: 2px solid #f43f5e;
+}
+.cyber-corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #f43f5e;
+  border-right: 2px solid #f43f5e;
+}
+
+/* Cyber Buttons */
+.cyber-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.08em;
+}
+
+.cyber-btn-primary {
+  background: linear-gradient(135deg, #e11d48, #9f1239);
+  color: #ffffff;
+  border: 1px solid rgba(251, 113, 133, 0.4);
+}
+.cyber-btn-primary:hover {
+  background: linear-gradient(135deg, #f43f5e, #be123c);
+  border-color: #fb7185;
+  box-shadow: 0 0 25px rgba(244, 63, 94, 0.6);
+  transform: translateY(-2px);
+}
+
+.cyber-btn-secondary {
+  background: rgba(18, 16, 24, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+.cyber-btn-secondary:hover {
+  border-color: #f43f5e;
+  background: rgba(244, 63, 94, 0.15);
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Cyber Badges / Chips */
+.cyber-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(244, 63, 94, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  color: #fda4af;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  transition: all 0.2s ease;
+}
+.cyber-chip:hover {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: #f43f5e;
+  color: #ffffff;
+}
+
+/* Filter Buttons */
+.filter-btn.active {
+  background: #e11d48;
+  border-color: #fb7185;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+}
+
+/* Nav Link Active State */
+.nav-item.active {
+  background: rgba(244, 63, 94, 0.2) !important;
+  border-color: rgba(244, 63, 94, 0.5) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
+}
+
+/* Radar Rotating Animations for Avatar */
+@keyframes radarRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes radarRotateReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.cyber-radar-ring {
+  animation: radarRotate 18s linear infinite;
+}
+.cyber-radar-ring-reverse {
+  animation: radarRotateReverse 12s linear infinite;
+}
+
+/* Glitch Text Subtle Effect */
+@keyframes subtleGlitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-1px, 1px) }
+  40% { transform: translate(-1px, -1px) }
+  60% { transform: translate(1px, 1px) }
+  80% { transform: translate(1px, -1px) }
+  100% { transform: translate(0) }
+}
+.glitch-hover:hover {
+  animation: subtleGlitch 0.2s ease infinite;
+}
+
+/* Smooth Canvas Blend */
+#cyber-canvas {
+  mix-blend-mode: screen;
+}
+
+/* ===================================================================
+   Cyber Gold Styles (Golden Borders, Lines, Chips & Glows)
+   =================================================================== */
+.cyber-corner-gold {
+  position: relative;
+}
+.cyber-corner-gold::before,
+.cyber-corner-gold::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+.cyber-corner-gold::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #fbbf24;
+  border-left: 2px solid #fbbf24;
+  filter: drop-shadow(0 0 4px #f59e0b);
+}
+.cyber-corner-gold::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #fbbf24;
+  border-right: 2px solid #fbbf24;
+  filter: drop-shadow(0 0 4px #f59e0b);
+}
+
+.cyber-chip-gold {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fde68a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  transition: all 0.25s ease;
+}
+.cyber-chip-gold:hover {
+  background: rgba(245, 158, 11, 0.25);
+  border-color: #fbbf24;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+.gold-glow {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+}
+

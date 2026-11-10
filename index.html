@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pannathon Phetthong | ICT Portfolio - Sripatum University</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  
+  <!-- Google Fonts: Orbitron (Cyber), Prompt & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              black: '#07080c',
+              dark: '#0c0e14',
+              surface: 'rgba(18, 16, 24, 0.75)',
+              border: 'rgba(244, 63, 94, 0.22)',
+              crimson: '#f43f5e',
+              neon: '#fb7185',
+              deep: '#be123c',
+              glow: 'rgba(244, 63, 94, 0.45)',
+              accent: '#fda4af',
+              gold: '#f59e0b',
+              goldBright: '#fbbf24',
+              goldLight: '#fde68a',
+              goldDark: '#b45309',
+              goldBorder: 'rgba(245, 158, 11, 0.35)',
+              goldGlow: 'rgba(245, 158, 11, 0.4)'
+            }
+          },
+          fontFamily: {
+            cyber: ['Orbitron', 'sans-serif'],
+            body: ['Prompt', 'Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Custom Cyber Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-cyber-black text-slate-100 font-body selection:bg-rose-500 selection:text-white relative overflow-x-hidden min-h-screen">
+
+  <!-- Interactive Cyber Network Particle Canvas -->
+  <canvas id="cyber-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-45"></canvas>
+  <div class="cyber-scanline pointer-events-none fixed inset-0 z-10 opacity-30"></div>
+  <div class="cyber-vignette pointer-events-none fixed inset-0 z-0"></div>
+
+  <!-- Mobile Top Navigation Header -->
+  <header class="lg:hidden fixed top-0 left-0 right-0 z-40 bg-cyber-dark/90 backdrop-blur-md border-b border-cyber-border px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-2.5">
+      <div class="w-9 h-9 rounded-lg overflow-hidden border border-cyber-crimson shadow-[0_0_12px_rgba(244,63,94,0.5)] flex-shrink-0">
+        <img src="assets/profile.jpg" alt="นายปัณณธร เพชรทอง" class="w-full h-full object-cover object-top">
+      </div>
+      <div>
+        <span class="font-cyber font-bold text-sm tracking-wider text-white">PANNATHON</span>
+        <span class="block text-[10px] text-cyber-neon font-mono">ICT // SPU</span>
+      </div>
+    </div>
+    
+    <div class="flex items-center space-x-2">
+      <!-- Language Switcher Mobile -->
+      <button class="lang-switch-btn px-2.5 py-1 text-xs font-cyber font-semibold rounded border border-cyber-border bg-cyber-surface text-cyber-neon hover:bg-cyber-crimson hover:text-white transition-all">
+        <span class="lang-label">TH</span>
+      </button>
+
+      <!-- Sound Toggle -->
+      <button id="mobile-sound-btn" class="p-2 rounded border border-cyber-border bg-cyber-surface text-slate-400 hover:text-cyber-neon transition-all" title="Toggle Cyber Audio">
+        <svg class="w-4 h-4 sound-icon-on" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+      </button>
+
+      <!-- Hamburger Menu Toggle -->
+      <button id="mobile-menu-btn" class="p-2 rounded border border-cyber-border bg-cyber-surface text-cyber-neon hover:bg-cyber-crimson/20 focus:outline-none transition-all">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div id="mobile-overlay" class="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden transition-opacity"></div>
+
+  <!-- ===================================================================
+       STICKY LEFT VERTICAL SIDEBAR (Layout Requirement)
+       =================================================================== -->
+  <aside id="sidebar" class="fixed top-0 left-0 h-screen w-[290px] bg-cyber-dark/95 backdrop-blur-xl border-r border-cyber-border z-50 flex flex-col justify-between p-6 transition-transform duration-300 -translate-x-full lg:translate-x-0 shadow-[4px_0_24px_rgba(0,0,0,0.6)]">
+    
+    <!-- Top Part: Profile HUD & Branding -->
+    <div>
+      <!-- Branding & Cyber Signal -->
+      <div class="flex items-center justify-between pb-5 border-b border-cyber-border/70">
+        <div class="flex items-center space-x-3">
+          <div class="relative">
+            <div class="w-11 h-11 rounded-xl overflow-hidden border-2 border-cyber-crimson shadow-[0_0_15px_rgba(244,63,94,0.45)]">
+              <img src="assets/profile.jpg" alt="นายปัณณธร เพชรทอง" class="w-full h-full object-cover object-top hover:scale-105 transition-transform">
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-cyber-black shadow-[0_0_8px_#34d399] animate-pulse"></span>
+          </div>
+          <div>
+            <h1 class="font-cyber font-bold text-sm tracking-wider text-white">PANNATHON</h1>
+            <p class="text-[11px] font-mono text-cyber-neon flex items-center gap-1">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-cyber-crimson animate-ping"></span>
+              ICT // SPU ACTIVE
+            </p>
+          </div>
+        </div>
+
+        <!-- Language Switcher Desktop (TH / EN) -->
+        <button class="lang-switch-btn group relative px-3 py-1.5 rounded-md border border-cyber-border bg-cyber-surface hover:border-cyber-crimson hover:shadow-[0_0_12px_rgba(244,63,94,0.3)] transition-all flex items-center gap-1.5" title="Switch Language">
+          <span class="text-[11px] font-cyber font-bold text-cyber-neon group-hover:text-white transition-colors lang-label">TH</span>
+          <span class="text-[10px] text-slate-400">| EN</span>
+        </button>
+      </div>
+
+      <!-- Quick Mini Profile Spec -->
+      <div class="mt-4 p-3 rounded-lg bg-cyber-surface border border-cyber-border/50 text-[11px] font-mono space-y-1">
+        <div class="flex justify-between items-center text-slate-400">
+          <span data-i18n="spec_student">STUDENT ID</span>
+          <span class="text-rose-300 font-semibold">650XXXXX</span>
+        </div>
+        <div class="flex justify-between items-center text-slate-400">
+          <span data-i18n="spec_faculty">FACULTY</span>
+          <span class="text-white font-medium">ICT Sripatum</span>
+        </div>
+        <div class="flex justify-between items-center text-slate-400">
+          <span data-i18n="spec_status">STATUS</span>
+          <span class="text-emerald-400 font-semibold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> ONLINE
+          </span>
+        </div>
+        <!-- SPU Official Emblem Badge -->
+        <div class="pt-2 mt-2 border-t border-cyber-border/40">
+          <div class="py-1 px-2.5 rounded-md bg-white flex items-center justify-center gap-2 shadow-sm">
+            <img src="assets/logos/spu.png" alt="Sripatum University" class="h-5 w-5 object-contain">
+            <span class="text-[10px] font-cyber font-bold text-slate-800 tracking-wider">SRIPATUM UNIV.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Links (4 Main Sections) -->
+      <nav class="mt-6 space-y-1.5" id="nav-menu">
+        <a href="#hero" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-cyber-crimson/15 border border-transparent hover:border-cyber-border transition-all group active">
+          <span class="text-cyber-neon group-hover:text-white font-cyber text-xs tracking-wider opacity-75">01</span>
+          <span data-i18n="nav_hero">หน้าแรก (Home)</span>
+        </a>
+
+        <a href="#about" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-cyber-crimson/15 border border-transparent hover:border-cyber-border transition-all group">
+          <span class="text-cyber-neon group-hover:text-white font-cyber text-xs tracking-wider opacity-75">02</span>
+          <span data-i18n="nav_about">เกี่ยวกับ & การศึกษา</span>
+        </a>
+
+        <a href="#skills" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-cyber-crimson/15 border border-transparent hover:border-cyber-border transition-all group">
+          <span class="text-cyber-neon group-hover:text-white font-cyber text-xs tracking-wider opacity-75">03</span>
+          <span data-i18n="nav_skills">ทักษะ & ความเชี่ยวชาญ</span>
+        </a>
+
+        <a href="#contact" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-cyber-crimson/15 border border-transparent hover:border-cyber-border transition-all group">
+          <span class="text-cyber-neon group-hover:text-white font-cyber text-xs tracking-wider opacity-75">04</span>
+          <span data-i18n="nav_contact">ติดต่อฉัน (Contact)</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom Part: Audio Toggle, Phone Direct & Copyright -->
+    <div class="pt-4 border-t border-cyber-border/60 space-y-3">
+      <!-- Quick Call Button with Phone: 0800855329 -->
+      <a href="tel:0800855329" class="flex items-center justify-between p-2.5 rounded-lg bg-gradient-to-r from-rose-950/40 to-cyber-surface border border-cyber-border hover:border-cyber-crimson hover:shadow-[0_0_15px_rgba(244,63,94,0.3)] transition-all group text-xs font-mono">
+        <div class="flex items-center gap-2 text-slate-300 group-hover:text-white">
+          <span class="text-cyber-neon">📞</span>
+          <span>080-085-5329</span>
+        </div>
+        <span class="text-[10px] text-cyber-neon font-cyber uppercase tracking-wider group-hover:underline">CALL</span>
+      </a>
+
+      <!-- Cyber Audio & Theme Info -->
+      <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
+        <button id="sound-btn" class="flex items-center gap-1.5 hover:text-cyber-neon transition-colors" title="Toggle Cyber Beep Sound">
+          <span class="sound-status-dot w-2 h-2 rounded-full bg-cyber-crimson shadow-[0_0_6px_rgba(244,63,94,0.8)]"></span>
+          <span class="sound-label">AUDIO: ON</span>
+        </button>
+        <span class="text-[10px] text-slate-500">v2.6 CYBER</span>
+      </div>
+
+      <div class="text-[10px] text-slate-500 text-center font-mono">
+        © 2026 Pannathon Phetthong<br>Sripatum University ICT
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================================================================
+       MAIN CONTENT WRAPPER (Shifted for Left Sidebar)
+       =================================================================== -->
+  <main class="lg:ml-[290px] relative z-20 px-4 sm:px-8 md:px-12 py-10 lg:py-14 max-w-6xl">
+    
+    <!-- SECTION 1: HERO & CYBER ACCESS HUD -->
+    <section id="hero" class="min-h-[88vh] flex flex-col justify-center pt-16 lg:pt-0 pb-16">
+      
+      <!-- Top Cyber Tag -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyber-surface border border-cyber-border text-xs font-mono text-cyber-neon mb-6 w-fit shadow-[0_0_15px_rgba(244,63,94,0.15)]">
+        <span class="w-2 h-2 rounded-full bg-cyber-crimson animate-ping"></span>
+        <span data-i18n="hero_badge">🟢 SYSTEM INITIALIZED // ICT STUDENT PORTFOLIO</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Text & Headline (7 cols) -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="space-y-2">
+            <p class="font-mono text-cyber-neon text-sm tracking-wider uppercase flex items-center gap-2">
+              <span class="text-rose-400 font-bold">&gt;&gt;</span> <span data-i18n="hero_greeting">HELLO WORLD, I AM</span>
+            </p>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-cyber text-white leading-tight">
+              นายปัณณธร <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-rose-500 to-rose-300 drop-shadow-[0_0_20px_rgba(244,63,94,0.5)]">เพชรทอง</span>
+            </h1>
+            <h2 class="text-lg sm:text-2xl font-mono text-slate-300 font-semibold">
+              Mr. Pannathon Phetthong
+            </h2>
+          </div>
+
+          <!-- Animated Typewriter Cyber Terminal -->
+          <div class="p-4 rounded-xl bg-cyber-surface border border-cyber-border/80 backdrop-blur-md shadow-[0_0_25px_rgba(244,63,94,0.1)] relative cyber-corner">
+            <div class="flex items-center gap-2 mb-2 pb-2 border-b border-cyber-border/40 text-[11px] font-mono text-slate-400">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="ml-2 text-cyber-neon">terminal@spu-ict:~</span>
+            </div>
+            <p class="text-sm sm:text-base text-slate-200 font-mono flex items-center min-h-[44px]">
+              <span class="text-cyber-crimson mr-2 font-bold">&gt;</span>
+              <span id="typewriter-text" class="text-rose-200"></span>
+              <span class="typewriter-cursor inline-block w-2.5 h-4 bg-cyber-crimson ml-1 animate-pulse"></span>
+            </p>
+          </div>
+
+          <!-- Bio Pitch -->
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl" data-i18n="hero_desc">
+            นักศึกษาสาขาเทคโนโลยีสารสนเทศและการสื่อสาร (ICT) คณะเทคโนโลยีสารสนเทศ มหาวิทยาลัยศรีปทุม ผู้มีความหลงใหลในสถาปัตยกรรมระบบเครือข่าย (Network Infrastructure), คลาวด์คอมพิวติ้ง (Cloud Computing) และการพัฒนา Full-Stack Web Application ที่ปลอดภัยและมีประสิทธิภาพสูง
+          </p>
+
+          <!-- Quick Action Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#about" class="cyber-btn cyber-btn-primary px-6 py-3 rounded-lg font-cyber font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-[0_0_20px_rgba(244,63,94,0.4)]">
+              <span data-i18n="btn_view_about">ประวัติ & การศึกษา (About & Edu)</span>
+              <span>→</span>
+            </a>
+
+            <a href="#contact" class="cyber-btn cyber-btn-secondary px-6 py-3 rounded-lg font-cyber font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+              <span data-i18n="btn_contact_me">ติดต่อฉัน (Contact)</span>
+            </a>
+
+            <!-- Download CV / Resume -->
+            <button id="download-cv-btn" class="px-5 py-3 rounded-lg bg-cyber-surface border border-cyber-border hover:border-cyber-crimson text-slate-300 hover:text-white font-mono text-xs flex items-center gap-2 transition-all">
+              <svg class="w-4 h-4 text-cyber-neon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              <span data-i18n="btn_cv">ดาวน์โหลด Resume / CV</span>
+            </button>
+          </div>
+
+          <!-- Quick Stats Pill Row (Gold Cyber Accent) -->
+          <div class="grid grid-cols-3 gap-3 pt-4 max-w-lg font-mono text-center">
+            <div class="p-3 rounded-xl bg-cyber-surface/90 border border-amber-500/35 hover:border-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)] transition-all">
+              <div class="text-xl sm:text-2xl font-bold font-cyber text-amber-400">3.75+</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider" data-i18n="stat_gpa">ICT Cumulative GPA</div>
+            </div>
+            <div class="p-3 rounded-xl bg-cyber-surface/90 border border-amber-500/35 hover:border-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)] transition-all">
+              <div class="text-xl sm:text-2xl font-bold font-cyber text-amber-400">100%</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider" data-i18n="stat_dedication">Dedication & Drive</div>
+            </div>
+            <div class="p-3 rounded-xl bg-cyber-surface/90 border border-amber-500/35 hover:border-amber-400 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)] transition-all">
+              <div class="text-xl sm:text-2xl font-bold font-cyber text-amber-400">ICT</div>
+              <div class="text-[10px] text-slate-400 uppercase tracking-wider">Sripatum Univ.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cyber Holographic Full Half-Body Portrait Showcase (5 cols) -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-[340px] sm:max-w-[380px]">
+            <!-- Outer Ambient Glow -->
+            <div class="absolute -inset-2 bg-gradient-to-b from-rose-600/30 via-rose-500/10 to-transparent rounded-3xl blur-xl pointer-events-none"></div>
+            
+            <!-- Cyber Portrait Card (Half-Body Frame) -->
+            <div class="relative rounded-2xl bg-cyber-dark/95 border-2 border-cyber-crimson overflow-hidden shadow-[0_0_40px_rgba(244,63,94,0.45)] cyber-corner group">
+              <!-- Top HUD Header -->
+              <div class="px-4 py-2 bg-cyber-surface border-b border-cyber-border/70 flex items-center justify-between text-[11px] font-mono">
+                <span class="text-cyber-neon font-bold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>
+                  LIVE_IDENT // PANNATHON
+                </span>
+                <span class="text-rose-300 font-cyber">SPU-ICT</span>
+              </div>
+
+              <!-- Real Half-Body Portrait Image -->
+              <div class="relative w-full h-[440px] sm:h-[490px] overflow-hidden bg-gradient-to-b from-slate-900 via-cyber-dark to-black">
+                <img src="assets/profile.jpg" alt="นายปัณณธร เพชรทอง - Mr. Pannathon Phetthong" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700">
+                
+                <!-- Subtle Cyber Overlay Gradient at Bottom -->
+                <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-cyber-dark via-cyber-dark/70 to-transparent pointer-events-none"></div>
+
+                <!-- Floating Hologram Badges on Photo -->
+                <div class="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-cyber-dark/85 backdrop-blur-md border border-cyber-border/80 text-left">
+                  <div class="flex items-center justify-between mb-0.5">
+                    <span class="font-cyber font-bold text-xs text-white tracking-wider">นายปัณณธร เพชรทอง</span>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-rose-950/90 text-rose-300 border border-cyber-border">STUDENT</span>
+                  </div>
+                  <p class="text-[11px] font-mono text-cyber-neon">
+                    เทคโนโลยีสารสนเทศและการสื่อสาร (ICT) ม.ศรีปทุม
+                  </p>
+                </div>
+              </div>
+
+              <!-- Cyber Targeting Corner Marks -->
+              <span class="absolute top-10 left-2 text-[10px] text-cyber-neon font-mono font-bold">[+]</span>
+              <span class="absolute top-10 right-2 text-[10px] text-cyber-neon font-mono font-bold">[+]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT ME & EDUCATION (ประวัติการศึกษา) -->
+    <section id="about" class="py-16 border-t border-cyber-border/40">
+      
+      <!-- Section Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-2 text-cyber-neon font-mono text-xs mb-2">
+          <span class="w-8 h-[2px] bg-cyber-crimson"></span>
+          <span>// 02. PROFILE & ACADEMIC BACKGROUND</span>
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-cyber text-white flex items-center gap-3">
+          <span data-i18n="about_title">เกี่ยวกับฉัน & ประวัติการศึกษา</span>
+          <span class="text-cyber-crimson text-sm font-mono">[ICT-SPU]</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Bio & Mission (8 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="p-6 rounded-2xl bg-cyber-surface border border-cyber-border shadow-lg relative cyber-corner">
+            <h3 class="text-lg font-bold font-cyber text-white mb-3 flex items-center gap-2">
+              <span class="text-cyber-neon">⚡</span>
+              <span data-i18n="about_heading">ความมุ่งมั่นและเป้าหมายในวิชาชีพ ICT</span>
+            </h3>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4" data-i18n="about_p1">
+              สวัสดีครับ! ผม <strong>นายปัณณธร เพชรทอง (Pannathon Phetthong)</strong> กำลังศึกษาระดับปริญญาตรี ณ <strong>มหาวิทยาลัยศรีปทุม (Sripatum University)</strong> คณะเทคโนโลยีสารสนเทศ สาขาเทคโนโลยีสารสนเทศและการสื่อสาร (ICT)
+            </p>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4" data-i18n="about_p2">
+              ด้วยความสนใจอย่างลึกซึ้งในระบบสารสนเทศยุคใหม่ ผมมุ่งเน้นการบูรณาการระหว่าง <em>Infrastructure & Network Engineering</em> กับ <em>Modern Full-Stack Web Development</em> เพื่อสร้างโซลูชันที่เสถียร รองรับการขยายตัว และปลอดภัยตามมาตรฐานสากล
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-cyber-border/40">
+              <div class="flex items-start gap-2.5">
+                <span class="text-cyber-neon mt-0.5">✦</span>
+                <div class="text-xs">
+                  <strong class="text-white block font-medium" data-i18n="trait_1_title">Network & System Design</strong>
+                  <span class="text-slate-400" data-i18n="trait_1_desc">ออกแบบและจำลองระบบเครือข่าย LAN/WAN, Routing & Switch</span>
+                </div>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-cyber-neon mt-0.5">✦</span>
+                <div class="text-xs">
+                  <strong class="text-white block font-medium" data-i18n="trait_2_title">Modern Web Development</strong>
+                  <span class="text-slate-400" data-i18n="trait_2_desc">พัฒนาเว็บด้วย Tailwind CSS, JavaScript ES6+, React & API</span>
+                </div>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-cyber-neon mt-0.5">✦</span>
+                <div class="text-xs">
+                  <strong class="text-white block font-medium" data-i18n="trait_3_title">Cloud & Virtualization</strong>
+                  <span class="text-slate-400" data-i18n="trait_3_desc">จัดการ Linux Server, Docker Containers & Virtual Machines</span>
+                </div>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-cyber-neon mt-0.5">✦</span>
+                <div class="text-xs">
+                  <strong class="text-white block font-medium" data-i18n="trait_4_title">Cyber Awareness & ICT</strong>
+                  <span class="text-slate-400" data-i18n="trait_4_desc">ความตระหนักรู้ด้านความปลอดภัยไซเบอร์และ พ.ร.บ. ข้อมูล</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic Timeline Cards (4 Levels) -->
+          <div class="p-6 rounded-2xl bg-cyber-surface border border-cyber-border space-y-6">
+            <h3 class="text-base font-bold font-cyber text-white flex items-center gap-2">
+              <span class="text-cyber-neon">🎓</span>
+              <span data-i18n="edu_timeline_title">เส้นทางการศึกษา (Education Timeline)</span>
+            </h3>
+
+            <div class="space-y-6 border-l-2 border-cyber-crimson/80 pl-6 ml-2 relative">
+              
+              <!-- 1. SPU Card (Higher Education) -->
+              <div class="relative group p-4 sm:p-5 rounded-xl bg-cyber-dark/70 border border-cyber-border hover:border-cyber-crimson transition-all flex flex-col sm:flex-row items-start gap-4">
+                <span class="hidden sm:flex absolute -left-[33px] top-6 w-4 h-4 rounded-full bg-cyber-dark border-2 border-cyber-crimson items-center justify-center shadow-[0_0_8px_#f43f5e]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                </span>
+                <!-- Logo (SPU - Sripatum University) -->
+                <div class="w-14 h-14 rounded-xl bg-white p-1 flex-shrink-0 flex items-center justify-center border-2 border-cyber-crimson/80 shadow-[0_0_12px_rgba(244,63,94,0.35)] overflow-hidden">
+                  <img src="assets/logos/spu.png" alt="Sripatum University Logo" class="max-w-full max-h-full object-contain">
+                </div>
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                    <h4 class="font-bold text-white text-sm sm:text-base group-hover:text-cyber-neon transition-colors" data-i18n="edu_spu_name">มหาวิทยาลัยศรีปทุม (Sripatum University)</h4>
+                    <span class="text-[11px] font-mono text-cyber-neon px-2.5 py-0.5 rounded bg-rose-950/60 border border-cyber-border" data-i18n="edu_spu_year">2565 - ปัจจุบัน (กำลังศึกษา)</span>
+                  </div>
+                  <p class="text-xs font-semibold text-rose-300 mb-1" data-i18n="edu_spu_degree">
+                    ปริญญาตรี วท.บ. สาขาเทคโนโลยีสารสนเทศและการสื่อสาร (ICT) | คณะเทคโนโลยีสารสนเทศ
+                  </p>
+                  <p class="text-xs text-slate-400 leading-relaxed" data-i18n="edu_spu_desc">
+                    ศึกษาเจาะลึกระบบเครือข่ายคอมพิวเตอร์, การสื่อสารโทรคมนาคม, สถาปัตยกรรมคลาวด์, การพัฒนาเว็บแอปพลิเคชัน และเทคโนโลยีสารสนเทศยุคใหม่
+                  </p>
+                </div>
+              </div>
+
+              <!-- 2. Surasakmontree School (High School: M.4 - M.6) -->
+              <div class="relative group p-4 sm:p-5 rounded-xl bg-cyber-dark/70 border border-cyber-border hover:border-cyber-crimson transition-all flex flex-col sm:flex-row items-start gap-4">
+                <span class="hidden sm:flex absolute -left-[33px] top-6 w-4 h-4 rounded-full bg-cyber-dark border-2 border-cyber-crimson items-center justify-center shadow-[0_0_8px_#f43f5e]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                </span>
+                <!-- Logo -->
+                <div class="w-14 h-14 rounded-xl bg-white p-1 flex-shrink-0 flex items-center justify-center border-2 border-cyber-crimson/80 shadow-[0_0_12px_rgba(244,63,94,0.35)] overflow-hidden">
+                  <img src="assets/logos/surasak.png" alt="Surasakmontree School Logo" class="max-w-full max-h-full object-contain">
+                </div>
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                    <h4 class="font-bold text-white text-sm sm:text-base group-hover:text-cyber-neon transition-colors" data-i18n="edu_surasak_name">โรงเรียนสุรศักดิ์มนตรี</h4>
+                    <span class="text-[11px] font-mono text-cyber-neon px-2.5 py-0.5 rounded bg-rose-950/60 border border-cyber-border" data-i18n="edu_surasak_level">มัธยมศึกษาตอนปลาย (ม.4 - ม.6)</span>
+                  </div>
+                  <p class="text-xs font-semibold text-rose-300 mb-1" data-i18n="edu_surasak_field">
+                    สำเร็จการศึกษาระดับมัธยมศึกษาปีที่ 4 - 6 (กรุงเทพมหานคร)
+                  </p>
+                  <p class="text-xs text-slate-400 leading-relaxed" data-i18n="edu_surasak_desc">
+                    ศึกษาหลักสูตรมัธยมศึกษาตอนปลาย เสริมสร้างทักษะการคิดวิเคราะห์ คณิตศาสตร์ วิทยาศาสตร์ และพื้นฐานเทคโนโลยีคอมพิวเตอร์ เพื่อเตรียมพร้อมสู่ระดับอุดมศึกษา
+                  </p>
+                </div>
+              </div>
+
+              <!-- 3. Thesaban 1 Tang-on School (Middle School: M.1 - M.3) -->
+              <div class="relative group p-4 sm:p-5 rounded-xl bg-cyber-dark/70 border border-cyber-border hover:border-cyber-crimson transition-all flex flex-col sm:flex-row items-start gap-4">
+                <span class="hidden sm:flex absolute -left-[33px] top-6 w-4 h-4 rounded-full bg-cyber-dark border-2 border-cyber-crimson items-center justify-center shadow-[0_0_8px_#f43f5e]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                </span>
+                <!-- Logo -->
+                <div class="w-14 h-14 rounded-xl bg-white p-1 flex-shrink-0 flex items-center justify-center border-2 border-cyber-crimson/80 shadow-[0_0_12px_rgba(244,63,94,0.35)] overflow-hidden">
+                  <img src="assets/logos/tangon.png" alt="Thesaban 1 Tang-on School Logo" class="max-w-full max-h-full object-contain">
+                </div>
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                    <h4 class="font-bold text-white text-sm sm:text-base group-hover:text-cyber-neon transition-colors" data-i18n="edu_tangon_name">โรงเรียนเทศบาล ๑ (แตงอ่อนเผดิมวิทยา)</h4>
+                    <span class="text-[11px] font-mono text-cyber-neon px-2.5 py-0.5 rounded bg-rose-950/60 border border-cyber-border" data-i18n="edu_tangon_level">มัธยมศึกษาตอนต้น (ม.1 - ม.3)</span>
+                  </div>
+                  <p class="text-xs font-semibold text-rose-300 mb-1" data-i18n="edu_tangon_field">
+                    สำเร็จการศึกษาระดับมัธยมศึกษาปีที่ 1 - 3
+                  </p>
+                  <p class="text-xs text-slate-400 leading-relaxed" data-i18n="edu_tangon_desc">
+                    ปูพื้นฐานการเรียนรู้ด้านวิชาการ การคิดคำนวณ ตลอดจนกิจกรรมและทักษะการทำงานร่วมกับผู้อื่นอย่างสร้างสรรค์
+                  </p>
+                </div>
+              </div>
+
+              <!-- 4. Thesaban Mueang Tha Kham 3 School (Primary School: P.1 - P.6) -->
+              <div class="relative group p-4 sm:p-5 rounded-xl bg-cyber-dark/70 border border-cyber-border hover:border-cyber-crimson transition-all flex flex-col sm:flex-row items-start gap-4">
+                <span class="hidden sm:flex absolute -left-[33px] top-6 w-4 h-4 rounded-full bg-cyber-dark border-2 border-cyber-crimson items-center justify-center shadow-[0_0_8px_#f43f5e]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                </span>
+                <!-- Logo -->
+                <div class="w-14 h-14 rounded-xl bg-white p-1 flex-shrink-0 flex items-center justify-center border-2 border-cyber-crimson/80 shadow-[0_0_12px_rgba(244,63,94,0.35)] overflow-hidden">
+                  <img src="assets/logos/thakham.png" alt="Thesaban Mueang Tha Kham 3 School Logo" class="max-w-full max-h-full object-contain">
+                </div>
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+                    <h4 class="font-bold text-white text-sm sm:text-base group-hover:text-cyber-neon transition-colors" data-i18n="edu_thakham_name">โรงเรียนเทศบาลเมืองท่าข้าม ๓</h4>
+                    <span class="text-[11px] font-mono text-cyber-neon px-2.5 py-0.5 rounded bg-rose-950/60 border border-cyber-border" data-i18n="edu_thakham_level">ประถมศึกษา (ป.1 - ป.6)</span>
+                  </div>
+                  <p class="text-xs font-semibold text-rose-300 mb-1" data-i18n="edu_thakham_field">
+                    สำเร็จการศึกษาระดับประถมศึกษาปีที่ 1 - 6
+                  </p>
+                  <p class="text-xs text-slate-400 leading-relaxed" data-i18n="edu_thakham_desc">
+                    สำเร็จการศึกษาระดับชั้นประถมศึกษา ปลูกฝังระเบียบวินัย ความคิดริเริ่มสร้างสรรค์ และจุดเริ่มต้นของความใฝ่รู้ด้านเทคโนโลยี
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlights & Personal Attributes (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <!-- Info Snapshot Box -->
+          <div class="p-6 rounded-2xl bg-gradient-to-br from-rose-950/30 to-cyber-surface border border-cyber-border space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-cyber-border/40">
+              <span class="font-cyber text-xs text-white font-bold" data-i18n="info_snapshot">ข้อมูลสังเขป (SUMMARY)</span>
+              <span class="text-xs font-mono text-cyber-neon">ID: ICT-SPU-26</span>
+            </div>
+
+            <ul class="text-xs font-mono space-y-3">
+              <li class="flex justify-between items-center py-1 border-b border-white/5">
+                <span class="text-slate-400" data-i18n="lbl_name">ชื่อ-สกุล:</span>
+                <span class="text-white font-semibold">นายปัณณธร เพชรทอง</span>
+              </li>
+              <li class="flex justify-between items-center py-1 border-b border-white/5">
+                <span class="text-slate-400" data-i18n="lbl_eng_name">Name (EN):</span>
+                <span class="text-white font-semibold">Mr. Pannathon Phetthong</span>
+              </li>
+              <li class="flex justify-between items-center py-1 border-b border-white/5">
+                <span class="text-slate-400" data-i18n="lbl_faculty">คณะ / สาขา:</span>
+                <span class="text-rose-300 font-semibold">ICT / Sripatum University</span>
+              </li>
+              <li class="flex justify-between items-center py-1 border-b border-white/5">
+                <span class="text-slate-400" data-i18n="lbl_phone">เบอร์โทรศัพท์:</span>
+                <a href="tel:0800855329" class="text-cyber-neon hover:underline font-bold">080-085-5329</a>
+              </li>
+              <li class="flex justify-between items-center py-1 border-b border-white/5">
+                <span class="text-slate-400">LINE ID:</span>
+                <a href="https://line.me/ti/p/~27112549" target="_blank" rel="noopener" class="text-emerald-400 hover:underline font-bold">27112549</a>
+              </li>
+              <li class="flex justify-between items-center py-1 border-b border-white/5">
+                <span class="text-slate-400">Instagram:</span>
+                <a href="https://www.instagram.com/Few_mx15/" target="_blank" rel="noopener" class="text-pink-400 hover:underline font-semibold">Few_mx15</a>
+              </li>
+              <li class="flex justify-between items-center py-1 border-b border-white/5">
+                <span class="text-slate-400" data-i18n="lbl_location">ที่ตั้ง:</span>
+                <span class="text-white">กรุงเทพมหานคร, ประเทศไทย</span>
+              </li>
+              <li class="flex justify-between items-center py-1">
+                <span class="text-slate-400" data-i18n="lbl_status">สถานะ:</span>
+                <span class="text-emerald-400 font-bold" data-i18n="val_status">พร้อมรับงานและฝึกงาน (Available)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- SPU Vision Card with SIT Logo -->
+          <div class="p-5 rounded-2xl bg-cyber-surface border border-cyber-border text-xs leading-relaxed text-slate-300 relative overflow-hidden">
+            <div class="absolute -right-4 -bottom-4 text-6xl text-rose-500/10 font-cyber font-black select-none pointer-events-none">
+              SPU
+            </div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 p-1 bg-white rounded-lg flex items-center justify-center border border-cyber-crimson/60 shadow-[0_0_8px_rgba(244,63,94,0.3)] flex-shrink-0">
+                <img src="assets/logos/spu.png" alt="Sripatum University Logo" class="w-full h-full object-contain">
+              </div>
+              <h4 class="font-bold text-white flex items-center gap-2">
+                <span class="text-rose-400 font-mono">#</span>
+                <span data-i18n="spu_spirit">จิตวิญญาณแห่ง SPU ICT: เรียนกับตัวจริง ประสบการณ์จริง</span>
+              </h4>
+            </div>
+            <p class="text-slate-400 text-xs" data-i18n="spu_spirit_desc">
+              มุ่งเน้นการลงมือปฏิบัติจริง (Hands-on Practice) ผ่านแล็บเครือข่าย การจำลองระบบเสมือนจริง และพัฒนาโปรเจกต์ที่ตอบโจทย์อุตสาหกรรมดิจิทัลแห่งอนาคต
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: SKILLS & TECH STACK (ทักษะและความเชี่ยวชาญ - สไตล์ Cyber Gold) -->
+    <section id="skills" class="py-16 border-t border-amber-500/30 relative">
+      
+      <!-- Section Header with Cyber Gold Accents -->
+      <div class="mb-10">
+        <div class="flex items-center gap-2 text-amber-400 font-mono text-xs mb-2">
+          <span class="w-8 h-[2px] bg-gradient-to-r from-amber-500 to-yellow-300 shadow-[0_0_8px_#f59e0b]"></span>
+          <span>// 03. TECHNICAL CAPABILITIES & TOOLSET</span>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <h2 class="text-2xl sm:text-4xl font-extrabold font-cyber text-white flex items-center gap-3">
+            <span data-i18n="skills_title">ทักษะ & ความเชี่ยวชาญ</span>
+            <span class="text-amber-400 text-sm font-mono">[TECH-MATRIX]</span>
+          </h2>
+          <!-- Intermediate Level Honest Badge -->
+          <span class="px-3 py-1 rounded-full bg-amber-950/60 border border-amber-500/50 text-amber-300 text-xs font-mono flex items-center gap-2 shadow-[0_0_12px_rgba(245,158,11,0.25)]">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span>ระดับทักษะ: ปานกลาง (Intermediate Level)</span>
+          </span>
+        </div>
+        <p class="text-slate-400 text-sm mt-1" data-i18n="skills_subtitle">
+          ทักษะด้านระบบเครือข่ายคอมพิวเตอร์, การพัฒนาเว็บแอปพลิเคชัน, คลาวด์ และเครื่องมือสารสนเทศ
+        </p>
+      </div>
+
+      <!-- Skills 4-Column Grid (Cyber Gold Borders & Lines) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Category 1: Network & Infrastructure (Gold Theme) -->
+        <div class="p-6 rounded-2xl bg-cyber-surface/90 border border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] transition-all group flex flex-col justify-between cyber-corner-gold">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-950/80 to-yellow-950/40 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)] flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:border-amber-300 transition-all">
+              🌐
+            </div>
+            <h3 class="font-cyber font-bold text-white text-base mb-1 group-hover:text-amber-300 transition-colors" data-i18n="cat_net">Network & Infrastructure</h3>
+            <p class="text-xs text-amber-200/80 font-mono mb-4" data-i18n="cat_net_sub">เครือข่าย & สถาปัตยกรรมระบบ</p>
+            
+            <div class="space-y-3 text-xs font-mono">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Cisco Packet Tracer</span>
+                  <span class="text-amber-300 font-bold">82%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[82%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">TCP/IP, VLAN, Subnetting</span>
+                  <span class="text-amber-300 font-bold">80%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[80%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Routing & Switching</span>
+                  <span class="text-amber-300 font-bold">75%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[75%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">DNS, DHCP, NAT Config</span>
+                  <span class="text-amber-300 font-bold">68%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[68%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-amber-500/20 flex flex-wrap gap-1.5">
+            <span class="cyber-chip-gold">OSI Model</span>
+            <span class="cyber-chip-gold">Wireshark</span>
+            <span class="cyber-chip-gold">LAN/WLAN</span>
+          </div>
+        </div>
+
+        <!-- Category 2: Web & Software Development (Gold Theme) -->
+        <div class="p-6 rounded-2xl bg-cyber-surface/90 border border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] transition-all group flex flex-col justify-between cyber-corner-gold">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-950/80 to-yellow-950/40 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)] flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:border-amber-300 transition-all">
+              💻
+            </div>
+            <h3 class="font-cyber font-bold text-white text-base mb-1 group-hover:text-amber-300 transition-colors" data-i18n="cat_web">Web & Software Dev</h3>
+            <p class="text-xs text-amber-200/80 font-mono mb-4" data-i18n="cat_web_sub">พัฒนาเว็บแอปพลิเคชัน</p>
+
+            <div class="space-y-3 text-xs font-mono">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">HTML5 / Modern CSS3</span>
+                  <span class="text-amber-300 font-bold">85%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[85%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Tailwind CSS</span>
+                  <span class="text-amber-300 font-bold">82%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[82%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">JavaScript (ES6+)</span>
+                  <span class="text-amber-300 font-bold">76%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[76%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">PHP & Node.js Basics</span>
+                  <span class="text-amber-300 font-bold">65%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[65%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-amber-500/20 flex flex-wrap gap-1.5">
+            <span class="cyber-chip-gold">REST API</span>
+            <span class="cyber-chip-gold">Responsive UI</span>
+            <span class="cyber-chip-gold">DOM</span>
+          </div>
+        </div>
+
+        <!-- Category 3: Database & Cloud (Gold Theme) -->
+        <div class="p-6 rounded-2xl bg-cyber-surface/90 border border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] transition-all group flex flex-col justify-between cyber-corner-gold">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-950/80 to-yellow-950/40 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)] flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:border-amber-300 transition-all">
+              ☁️
+            </div>
+            <h3 class="font-cyber font-bold text-white text-base mb-1 group-hover:text-amber-300 transition-colors" data-i18n="cat_cloud">Cloud & Database</h3>
+            <p class="text-xs text-amber-200/80 font-mono mb-4" data-i18n="cat_cloud_sub">ฐานข้อมูล & ระบบคลาวด์</p>
+
+            <div class="space-y-3 text-xs font-mono">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">MySQL & SQL Query</span>
+                  <span class="text-amber-300 font-bold">80%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[80%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Linux (Ubuntu / Debian)</span>
+                  <span class="text-amber-300 font-bold">76%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[76%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Docker Containers</span>
+                  <span class="text-amber-300 font-bold">70%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[70%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Google Cloud / AWS Basics</span>
+                  <span class="text-amber-300 font-bold">65%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[65%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-amber-500/20 flex flex-wrap gap-1.5">
+            <span class="cyber-chip-gold">ER-Diagram</span>
+            <span class="cyber-chip-gold">VirtualBox</span>
+            <span class="cyber-chip-gold">SSH</span>
+          </div>
+        </div>
+
+        <!-- Category 4: Security & Professional Tools (Gold Theme) -->
+        <div class="p-6 rounded-2xl bg-cyber-surface/90 border border-amber-500/40 hover:border-amber-400 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)] transition-all group flex flex-col justify-between cyber-corner-gold">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-950/80 to-yellow-950/40 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)] flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:border-amber-300 transition-all">
+              🛡️
+            </div>
+            <h3 class="font-cyber font-bold text-white text-base mb-1 group-hover:text-amber-300 transition-colors" data-i18n="cat_sec">Security & DevTools</h3>
+            <p class="text-xs text-amber-200/80 font-mono mb-4" data-i18n="cat_sec_sub">ความปลอดภัย & เครื่องมือ</p>
+
+            <div class="space-y-3 text-xs font-mono">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Git & GitHub Versioning</span>
+                  <span class="text-amber-300 font-bold">82%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[82%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Cybersecurity Concepts</span>
+                  <span class="text-amber-300 font-bold">68%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[68%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">Figma UI/UX Prototyping</span>
+                  <span class="text-amber-300 font-bold">74%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[74%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate-300">VS Code & CLI Tools</span>
+                  <span class="text-amber-300 font-bold">85%</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden border border-white/5">
+                  <div class="bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 h-1.5 rounded-full w-[85%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-amber-500/20 flex flex-wrap gap-1.5">
+            <span class="cyber-chip-gold">Postman</span>
+            <span class="cyber-chip-gold">Firewall</span>
+            <span class="cyber-chip-gold">Scrum</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: CONTACT ME (ติดต่อฉัน) -->
+    <section id="contact" class="py-16 border-t border-cyber-border/40">
+      
+      <!-- Section Header -->
+      <div class="mb-10">
+        <div class="flex items-center gap-2 text-cyber-neon font-mono text-xs mb-2">
+          <span class="w-8 h-[2px] bg-cyber-crimson"></span>
+          <span>// 04. TRANSMISSION & INQUIRIES</span>
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold font-cyber text-white flex items-center gap-3">
+          <span data-i18n="contact_title">ติดต่อฉัน</span>
+          <span class="text-cyber-crimson text-sm font-mono">[OPEN-CHANNEL]</span>
+        </h2>
+        <p class="text-slate-400 text-sm mt-1" data-i18n="contact_subtitle">
+          สนใจร่วมงาน พูดคุยแลกเปลี่ยนด้านเทคโนโลยี หรือติดต่อเพื่อโอกาสฝึกงาน/ร่วมงาน
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Contact Channel Cards (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Direct Phone Card (Number: 0800855329) -->
+          <div class="p-6 rounded-2xl bg-cyber-surface border border-cyber-border hover:border-cyber-crimson transition-all relative cyber-corner group">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-rose-950/60 border border-cyber-border flex items-center justify-center text-lg text-cyber-neon">
+                📞
+              </div>
+              <div>
+                <span class="text-xs font-mono text-slate-400 block" data-i18n="contact_phone_lbl">TELEPHONE / เบอร์โทรศัพท์</span>
+                <span class="text-lg font-mono font-bold text-white group-hover:text-cyber-neon transition-colors">080-085-5329</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 pt-2 border-t border-white/5">
+              <a href="tel:0800855329" class="flex-1 text-center py-2 px-3 rounded-lg bg-cyber-crimson hover:bg-rose-600 text-white font-cyber text-xs font-bold transition-all shadow-[0_0_12px_rgba(244,63,94,0.3)]">
+                <span data-i18n="btn_call_now">โทรออกทันที</span>
+              </a>
+              <button onclick="copyToClipboard('0800855329')" class="py-2 px-3 rounded-lg bg-cyber-surface border border-cyber-border hover:border-cyber-crimson text-slate-300 hover:text-white font-mono text-xs transition-all" title="Copy Number">
+                <span data-i18n="btn_copy">คัดลอก</span> 📋
+              </button>
+            </div>
+          </div>
+
+          <!-- Email Channel -->
+          <div class="p-5 rounded-2xl bg-cyber-surface border border-cyber-border hover:border-cyber-crimson transition-all flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-rose-950/60 border border-cyber-border flex items-center justify-center text-lg text-cyber-neon">
+              ✉️
+            </div>
+            <div>
+              <span class="text-xs font-mono text-slate-400 block" data-i18n="contact_email_lbl">EMAIL / อีเมลติดต่อ</span>
+              <a href="mailto:pannathon.phet@spumail.net" class="text-sm font-mono font-semibold text-white hover:text-cyber-neon transition-colors">
+                pannathon.phet@spumail.net
+              </a>
+            </div>
+          </div>
+
+          <!-- University Location -->
+          <div class="p-5 rounded-2xl bg-cyber-surface border border-cyber-border flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-rose-950/60 border border-cyber-border flex items-center justify-center text-lg text-cyber-neon">
+              🏫
+            </div>
+            <div>
+              <span class="text-xs font-mono text-slate-400 block" data-i18n="contact_univ_lbl">ACADEMIC INSTITUTION / สถาบัน</span>
+              <span class="text-sm font-medium text-white">มหาวิทยาลัยศรีปทุม (Sripatum University, Bangkok)</span>
+            </div>
+          </div>
+
+          <!-- Social QR Codes (Instagram & LINE) -->
+          <div class="p-6 rounded-2xl bg-cyber-surface border border-cyber-border space-y-4">
+            <div class="flex items-center justify-between border-b border-cyber-border/40 pb-3">
+              <div>
+                <span class="text-xs font-mono text-slate-400 block" data-i18n="contact_social_lbl">NETWORK NODES / โซเชียลมีเดีย & สแกน QR CODE</span>
+                <span class="text-[11px] font-mono text-cyber-neon">สแกนด้วยกล้องมือถือเพื่อติดต่อโดยตรง</span>
+              </div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-rose-950/60 text-rose-300 border border-cyber-border">DIRECT QR</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+              <!-- 1. Instagram QR Card -->
+              <div class="p-4 rounded-xl bg-cyber-dark/85 border border-cyber-border hover:border-pink-500 hover:shadow-[0_0_20px_rgba(236,72,153,0.3)] transition-all flex flex-col items-center text-center group">
+                <div class="flex items-center justify-center gap-2 mb-3 w-full pb-2 border-b border-white/5">
+                  <div class="w-6 h-6 rounded-md bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white text-xs shadow-sm">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                  </div>
+                  <span class="text-xs font-cyber font-bold text-white tracking-wider">INSTAGRAM</span>
+                </div>
+
+                <!-- QR Image Box -->
+                <a href="https://www.instagram.com/Few_mx15/" target="_blank" rel="noopener" class="block w-40 h-40 rounded-xl bg-white p-2 border-2 border-pink-500/60 shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:scale-105 transition-transform overflow-hidden group/qr mb-3" title="คลิกเพื่อเปิด Instagram หรือสแกน QR Code">
+                  <img src="assets/qr/instagram_card.png" alt="Instagram QR Code Few_mx15" class="w-full h-full object-contain">
+                </a>
+
+                <a href="https://www.instagram.com/Few_mx15/" target="_blank" rel="noopener" class="w-full py-2 px-3 rounded-lg bg-pink-950/50 border border-pink-600/60 hover:bg-pink-600 text-pink-200 hover:text-white font-mono text-xs flex items-center justify-center gap-1.5 transition-all">
+                  <span>เปิด Instagram (@Few_mx15)</span>
+                  <span>→</span>
+                </a>
+              </div>
+
+              <!-- 2. LINE QR Card -->
+              <div class="p-4 rounded-xl bg-cyber-dark/85 border border-cyber-border hover:border-[#06C755] hover:shadow-[0_0_20px_rgba(6,199,85,0.3)] transition-all flex flex-col items-center text-center group">
+                <div class="flex items-center justify-center gap-2 mb-3 w-full pb-2 border-b border-white/5">
+                  <div class="w-6 h-6 rounded-md bg-[#06C755] flex items-center justify-center text-white text-xs">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.019 9.607.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.026c-.052.313-.25 1.226 1.074.669 1.323-.559 7.15-4.212 9.761-7.212 1.544-1.724 2.221-3.666 2.221-5.767z"/></svg>
+                  </div>
+                  <span class="text-xs font-cyber font-bold text-white tracking-wider">LINE OFFICIAL</span>
+                </div>
+
+                <!-- QR Image Box -->
+                <a href="https://line.me/ti/p/~27112549" target="_blank" rel="noopener" class="block w-40 h-40 rounded-xl bg-white p-2 border-2 border-[#06C755]/60 shadow-[0_0_15px_rgba(6,199,85,0.3)] hover:scale-105 transition-transform overflow-hidden group/qr mb-3" title="คลิกเพื่อเพิ่มเพื่อน LINE หรือสแกน QR Code">
+                  <img src="assets/qr/line_qr.png" alt="LINE QR Code 27112549" class="w-full h-full object-contain">
+                </a>
+
+                <a href="https://line.me/ti/p/~27112549" target="_blank" rel="noopener" class="w-full py-2 px-3 rounded-lg bg-emerald-950/50 border border-emerald-600/60 hover:bg-emerald-600 text-emerald-200 hover:text-white font-mono text-xs flex items-center justify-center gap-1.5 transition-all">
+                  <span>เพิ่มเพื่อน LINE (27112549)</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive Contact Form (7 cols) -->
+        <div class="lg:col-span-7">
+          <div class="p-6 sm:p-8 rounded-2xl bg-cyber-surface border border-cyber-border relative cyber-corner shadow-xl">
+            <h3 class="text-lg font-bold font-cyber text-white mb-2 flex items-center gap-2">
+              <span class="text-cyber-neon">⚡</span>
+              <span data-i18n="form_title">ส่งข้อความถึงปัณณธร (Send Message)</span>
+            </h3>
+            <p class="text-xs text-slate-400 font-mono mb-6" data-i18n="form_desc">
+              ระบบรับส่งข้อความตรงถึงนักศึกษา ตอบกลับภายใน 24 ชั่วโมง
+            </p>
+
+            <form id="contact-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="form-name" class="block text-xs font-mono text-slate-300 mb-1" data-i18n="form_lbl_name">ชื่อของคุณ (Your Name) *</label>
+                  <input type="text" id="form-name" required placeholder="เช่น สมชาย ใจดี" class="w-full px-3.5 py-2.5 rounded-lg bg-cyber-dark/80 border border-cyber-border focus:border-cyber-crimson focus:outline-none focus:ring-1 focus:ring-cyber-crimson text-sm text-white placeholder-slate-600 transition-all">
+                </div>
+                <div>
+                  <label for="form-email" class="block text-xs font-mono text-slate-300 mb-1" data-i18n="form_lbl_email">อีเมลของคุณ (Your Email) *</label>
+                  <input type="email" id="form-email" required placeholder="name@company.com" class="w-full px-3.5 py-2.5 rounded-lg bg-cyber-dark/80 border border-cyber-border focus:border-cyber-crimson focus:outline-none focus:ring-1 focus:ring-cyber-crimson text-sm text-white placeholder-slate-600 transition-all">
+                </div>
+              </div>
+
+              <div>
+                <label for="form-subject" class="block text-xs font-mono text-slate-300 mb-1" data-i18n="form_lbl_subject">หัวข้อติดต่อ (Subject) *</label>
+                <input type="text" id="form-subject" required placeholder="เช่น โอกาสร่วมงาน / เสนอโปรเจกต์ไอซีที" class="w-full px-3.5 py-2.5 rounded-lg bg-cyber-dark/80 border border-cyber-border focus:border-cyber-crimson focus:outline-none focus:ring-1 focus:ring-cyber-crimson text-sm text-white placeholder-slate-600 transition-all">
+              </div>
+
+              <div>
+                <label for="form-message" class="block text-xs font-mono text-slate-300 mb-1" data-i18n="form_lbl_msg">ข้อความ (Message) *</label>
+                <textarea id="form-message" rows="4" required placeholder="รายละเอียดข้อความ หรือสิ่งที่ต้องการติดต่อ..." class="w-full px-3.5 py-2.5 rounded-lg bg-cyber-dark/80 border border-cyber-border focus:border-cyber-crimson focus:outline-none focus:ring-1 focus:ring-cyber-crimson text-sm text-white placeholder-slate-600 transition-all"></textarea>
+              </div>
+
+              <button type="submit" id="submit-btn" class="w-full cyber-btn cyber-btn-primary py-3 rounded-lg font-cyber font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(244,63,94,0.35)]">
+                <span data-i18n="btn_submit">ส่งข้อความทันที (TRANSMIT MESSAGE)</span>
+                <span>🚀</span>
+              </button>
+            </form>
+
+            <!-- Status Alert Toast Inside -->
+            <div id="form-status" class="mt-4 p-3 rounded-lg text-xs font-mono hidden"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-10 pb-6 border-t border-cyber-border/40 text-xs font-mono text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-cyber-crimson"></span>
+        <span>© 2026 นายปัณณธร เพชรทอง (Pannathon Phetthong) | ICT Sripatum University</span>
+      </div>
+      <div>
+        <a href="#hero" class="text-cyber-neon hover:underline">↑ TOP OF SYSTEM</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ===================================================================
+       MODAL FOR PROJECT DETAILS
+       =================================================================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-cyber-dark border border-cyber-crimson/80 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-[0_0_40px_rgba(244,63,94,0.35)] cyber-corner">
+      <button onclick="closeProjectModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl font-mono leading-none">&times;</button>
+      <div id="modal-content" class="space-y-4">
+        <!-- Content injected dynamically via script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl bg-cyber-dark border border-cyber-crimson text-white font-mono text-xs shadow-[0_0_25px_rgba(244,63,94,0.4)] hidden transition-all">
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
